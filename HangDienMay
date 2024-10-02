@@ -1,0 +1,43 @@
+package tuan8.TH;
+
+public class HangDienMay extends HangHoa{
+	public int thoiGianBaoHanh;
+	public float congSuat;
+	
+	
+	public int getThoiGianBaoHanh() {
+		return thoiGianBaoHanh;
+	}
+	public void setThoiGianBaoHanh(int thoiGianBaoHanh) {
+		if(thoiGianBaoHanh < 0) throw new IllegalAccessError("thoi gian bao hanh phai lon hon 0");
+		this.thoiGianBaoHanh = thoiGianBaoHanh;
+	}
+	public float getCongSuat() {
+		return congSuat;
+	}
+	public void setCongSuat(float congSuat) {
+		if(congSuat < 0) throw new IllegalAccessError("cong suat phai lon hon 0");
+		this.congSuat = congSuat;
+	}
+	
+	
+	public HangDienMay(String maHangHoa, String tenHangHoa, double donGia, int soLuongTon, int thoiGianBaoHanh,
+			double congSuat) {
+		super(maHangHoa, tenHangHoa, donGia, soLuongTon);
+		setThoiGianBaoHanh(thoiGianBaoHanh); 
+		setCongSuat(congSuat);
+	}
+	
+	public HangDienMay(String maHangHoa, String tenHangHoa, double donGia, int soLuongTon) {
+		super(maHangHoa, tenHangHoa, donGia, soLuongTon);
+	}
+	@Override
+	public double getTienVAT() {
+		return soLuongTon*donGia*1.1;
+	}
+	@Override
+	public String mucDoBanBuon() {
+		if(soLuongTon < 3 ) return "ban duoc";
+		return null;
+	}
+}
