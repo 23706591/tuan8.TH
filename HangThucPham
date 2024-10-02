@@ -1,0 +1,51 @@
+package tuan8.TH;
+
+import java.time.LocalDate;
+
+public class HangThucPham extends HangHoa {
+	
+	public String nhaCungCap;
+	public LocalDate ngaySanXuat, ngayHetHan;
+	
+	
+public String getNhaCungCap() {
+		return nhaCungCap;
+	}
+	public void setNhaCungCap(String nhaCungCap) {
+		this.nhaCungCap = nhaCungCap;
+	}
+	public LocalDate getNgaySanXuat() {
+		return ngaySanXuat;
+	}
+	public void setNgaySanXuat(LocalDate ngaySanXuat) {
+		if(ngaySanXuat.isBefore(LocalDate.now()) == false) throw new IllegalAccessError("ngay san xuat phai truoc ngay hom nay");
+		this.ngaySanXuat = ngaySanXuat;
+	}
+	public LocalDate getNgayHetHan() {
+		return ngayHetHan;
+	}
+	public void setNgayHetHan(LocalDate ngayHetHan) {
+		if(ngayHetHan.isAfter(ngaySanXuat) == false ) throw new IllegalAccessError("ngay het han phai sau ngay sna xuat");
+		this.ngayHetHan = ngayHetHan;
+	}
+	
+	
+@Override
+public double getTienVAT() {
+	return soLuongTon * donGia * 1.05;
+}
+public HangThucPham(String maHangHoa, String tenHangHoa, float donGia, int soLuongTon, String nhaCungCap,
+		LocalDate ngaySanXuat, LocalDate ngayHetHan) {
+	super(maHangHoa, tenHangHoa, donGia, soLuongTon);
+	this.nhaCungCap = nhaCungCap;
+	setNgayHetHan(ngayHetHan);
+	setNgaySanXuat(ngaySanXuat);
+}
+@Override
+	public String mucDoBanBuon() {
+		if(soLuongTon > 0 && ngayHetHan.isAfter(LocalDate.now()))
+		return "Kho ban";
+		
+		return null;
+	}
+}
