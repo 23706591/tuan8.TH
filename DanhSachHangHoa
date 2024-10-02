@@ -1,0 +1,99 @@
+package tuan8.TH;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+
+public class DanhSachHangHoa {
+	HangHoa [] dsHangHoa;
+	int n;
+	int dem=0;
+	public DanhSachHangHoa(int n) {
+		dsHangHoa = new HangHoa[n];
+	}
+	
+	void themHangHoa(HangHoa them) {
+		if(them == null) return;
+		if(dem == dsHangHoa.length) {
+			dsHangHoa = Arrays.copyOf(dsHangHoa, dem*2);
+		}
+		for(int i=0; i<dsHangHoa.length; i++) {
+			if(dsHangHoa[i] != null && dsHangHoa[i].getMaHangHoa().equalsIgnoreCase(them.getMaHangHoa()))
+				throw new IllegalAccessError("ma them khong duoc trung");
+		}
+		dsHangHoa[++dem] = them;
+	}
+	
+	void inDS() {
+		for(int i=0; i<dem; i++) {
+			if(dsHangHoa[i] != null)
+			dsHangHoa[i].toString();
+		}
+	}
+	void layThongTinTheoLoai(String loaiHH) {
+		for(int i=0; i<dem; i++) {
+			if(loaiHH.equalsIgnoreCase("Hang thuc pham")) {
+			if(dsHangHoa[i] != null && dsHangHoa[i] instanceof HangThucPham)
+				dsHangHoa[i].toString();
+			}
+			else if(loaiHH.equalsIgnoreCase("hang dien may")) {
+				if(dsHangHoa[i] != null && dsHangHoa[i] instanceof HangDienMay)
+					dsHangHoa[i].toString();
+			}else {
+				dsHangHoa[i].toString();
+			}
+		}
+	}
+	public void timHangHoa(String maTim) {
+		if(maTim == null )return;
+		for(int i=0; i<dem; i++) {
+			if(dsHangHoa[i] != null && dsHangHoa[i].getMaHangHoa().equalsIgnoreCase(maTim)) {
+				dsHangHoa[i].toString();
+				return;
+			}
+		}
+		System.out.println("khong co hang hoa co ma "+maTim);
+	}
+	
+	public void sapTheoTen() {
+		HangHoa[] temp = Arrays.copyOf(dsHangHoa, dem);
+		//Arrays.sort(temp, Comparator<HangHoa>);
+	}
+	
+	public void thongTinHangThucPhamKB() {
+		int ktr = 0;
+		for(int i=0; i<dem; i++) {
+			if(dsHangHoa[i] != null && (dsHangHoa[i] instanceof HangThucPham) && dsHangHoa[i].mucDoBanBuon()== "kho ban") {
+				dsHangHoa[i].toString();
+				ktr =1;
+			}
+		}
+		if(ktr == 0) System.out.println("khong co hang thuc pham kho ban");
+	}
+	public void xoaTheoMa(String maXoa) {
+		if(maXoa == null) return;
+		for(int i=0; i<dem; i++) {
+			if (dsHangHoa[i] != null && dsHangHoa[i].getMaHangHoa().equalsIgnoreCase(maXoa)) {
+				for(int j=i; j<dem; j++) {
+					dsHangHoa[j] = dsHangHoa[j+1];
+					--dem;
+					return;
+				}
+			}
+		}
+		System.out.println("khong co hang hoa de xoa");
+	}
+	public HangHoa[] getDSHH() {
+		return dsHangHoa;
+	}
+	public void xuaThongTin(HangHoa hhSua) {
+		if(hhSua == null )return;
+		for(int i=0; i<dem; i++) {
+			if (dsHangHoa[i] != null && dsHangHoa[i].getMaHangHoa().equalsIgnoreCase(hhSua.getMaHangHoa())) {
+				dsHangHoa[i] = hhSua;
+				return;
+			}
+			System.out.println("khong co ma phu hop de sua");
+		}
+	}
+}
