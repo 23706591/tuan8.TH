@@ -1,0 +1,32 @@
+package tuan8.TH;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class LopThuNghiem {
+	 public static void main(String[] args) {
+		 DanhSachHangHoa dsHH = new DanhSachHangHoa(10);
+		 khoiTao(dsHH);
+		 Scanner sc = new Scanner(System.in);
+		 int lc = 0;
+		 do {
+			
+			 System.out.println("\n1.thêm một hàng hóa vào danh sách (thêm thành công nếu không bị trùng mã hàng).\n"
+			 		+ "2.lấy thông tin toàn bộ danh sách các hàng hóa.\n"
+			 		+ "3.lấy thông tin từng loại hàng hóa.\n"
+			 		+ "4.tìm kiếm hàng hóa khi biết mã hàng (trả về hàng hóa tìm thấy).\r\n"
+			 		+ "5.sắp xếp hàng hóa theo tên hàng tăng dần.\n"
+			 		+ "6.sắp xếp hàng hóa theo số lượng tồn giảm dần.\n"
+			 		+ "7.lấy thông tin các hàng thực phẩm khó bán.\n"
+			 		+ "8.xóa hàng hóa khi biết mã hàng.\n"
+			 		+ "9.sửa thông tin đơn giá của hàng hóa khi biết mã hàng.\n"
+			 		+ "0. THOAT!");
+		 }while(lc != 0);
+	}
+	 public static void khoiTao(DanhSachHangHoa dsHH) {
+		 dsHH.themHangHoa(new HangDienMay("dm1", "dien may 1", 120000.22, 12,12, 12.7));
+		 dsHH.themHangHoa(new HangThucPham("htp1", "hthucPham1", 5000, 20, "Cong Ty A", LocalDate.of(2024, 5, 12), LocalDate.now()));
+		 dsHH.themHangHoa(new HangSanhSu("hss1", "sanh su 1", 2300000, 22, "cong ty b", LocalDate.now()));
+	 }
+	 
+}
